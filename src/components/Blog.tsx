@@ -1,5 +1,10 @@
 import React from 'react';
+import { BlogT } from '../types';
 
-const Blog = () => <div></div>;
+interface BlogProps {
+    blog: BlogT;
+}
+
+const Blog = ({ blog }: BlogProps) => <div>{blog.title}</div>;
 
 export default Blog;
