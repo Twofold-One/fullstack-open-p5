@@ -1,26 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import Blog from './components/Blog';
+import blogService from './services/blogs';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+    const [blogs, setBlogs] = useState();
+
+    useEffect(() => {
+        blogService.getAll().then((blogs) => setBlogs(blogs));
+    });
+
+    return (
+        <div className="App">
+            <h2>Blogs</h2>
+            {blogs.map((blog) => (
+                <Blog key={blog.id} blog={blog} />
+            ))}
+        </div>
+    );
+};
 
 export default App;
